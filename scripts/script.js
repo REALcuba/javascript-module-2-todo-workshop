@@ -1,10 +1,18 @@
-let myForm = document.querySelector("#new-todo");
+
+ const text = document.createElement("p")
+ const form = document.querySelector('form')
 
 
- const generetadToDoDOM = (todo)=>{
+const todos = [];
+const createTodos = (text) =>  {
+    todos.push(text);
+}
+
+
+ const generateToDoDOM = (todo)=>{
      const todoEl = document.createElement("label");
      const containerEl = document.createElement("div");
-     const todoText = document.createElement("text");
+     const todoText = document.createElement("span");
      todoText.textContent = todo;
      containerEl.appendChild.apply(todoText);
      todoEl.classList.add("list-items");
@@ -13,22 +21,35 @@ let myForm = document.querySelector("#new-todo");
      return todoEl;
  }
 
+  
 
- myForm.addEventListener("submit", (e) => {
+const renderTodos = (todos) => {
+    
+   const todoList = document.querySelector("#todos");
+   if(todos.length === 0){
+
+   }
+   todoList.innerHTML = " ";
+   todos.forEach((todo) => {
+       const label = generateToDoDOM(todo);
+       todoList.appendChild(label)
+   });
+
+}
+
+
+
+
+  document.querySelector("#new-todo").addEventListener("submit", (e) => {
      e.preventDefault();
      const text = e.target.elements.text.value.trim();
      if(text.length !== 0) {
-         createTodo(text)
+         createTodos(text)
          e.target.elements.text.value = "";
-     console.log(todos);
+     renderTodos(todos);
     }
      
  })
 
- const text = document.createElement("p")
- const form = document.querySelector('form')
-const todos = [];
-const createTodo = (text) => {
-     todos.push(text);
-}
+
 
